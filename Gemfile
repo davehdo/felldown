@@ -37,7 +37,7 @@ end
 
 gem "activerecord-postgresql-adapter"
 
-gem "twitter-bootstrap-rails"
+gem "twitter-bootstrap-rails", git: "git://github.com/seyhunak/twitter-bootstrap-rails.git", ref: "436ceba61a" #, branch: 'bootstrap3'
 
 gem "font-awesome-rails", "4.2.0"
 
