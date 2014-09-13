@@ -61,7 +61,7 @@
 			});
 		}
 	</script>
-	<%= render "map", lat: 39.95, lng: -75.19 %>
+	<%= render "map", markers: @events.select{|e|e.lat and e.lng}.collect{|e|{ name: e.name, lat: e.lat, lng: e.lng} } %>
   </div><!-- /span -->
 
 

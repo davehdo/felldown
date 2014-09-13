@@ -13,17 +13,20 @@ class Event < ActiveRecord::Base
     @client = Twilio::REST::Client.new account_sid, auth_token
     
     Follower.all.select{|e|e.valid_number?}.each do |follower|
-          @client.messages.create(
-            :from => '+12673231623',
-            :to => follower.number,
-            :body => self.name
-          )
-        end
+      begin
+        @client.messages.create(
+          :from => '+12673231623',
+          :to => follower.number,
+          :body => self.name
+        )
+      rescue
+        puts "Unable to send to #{follower.number}. invalid number?"
+      end
+    end
         
     Follower.all.select{|e| e.valid_email?}.each do |follower|
       FollowerMailer.send_notification(follower, self.name).deliver
     end
-    
   end
   
   def icon
