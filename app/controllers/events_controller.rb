@@ -25,6 +25,18 @@ class EventsController < ApplicationController
     @followers = Follower.all
   end
 
+  def medications
+    @meds = [
+      {name: 'Simvastatin', dose: '20mg at bedtime', doses: [nil, true, nil, nil], missed: 1},
+      {name: 'Lisinopril', dose: '40mg daily', doses: [true, nil, false, nil], missed: 4},
+      {name: 'Metformin', dose: '1000mg twice daily', doses: [true, true, false, nil], missed: 4},
+      {name: 'Aspirin', dose: '81mg daily', doses: [true, true, false, nil], missed: 2},
+      {name: 'Furosemide', dose: '40mg daily', doses: [true, true, false, nil], missed: 4},
+      {name: 'Levetiracetam', dose: '1000mg twice daily', doses: [true, true, false, nil], missed: 4}
+      
+      ]
+  end
+
   # GET /events/1
   def show
   end
