@@ -38,3 +38,5 @@ end
 gem "activerecord-postgresql-adapter"
 
 gem "twitter-bootstrap-rails"
+
+gem "font-awesome-rails", "4.2.0"

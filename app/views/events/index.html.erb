@@ -1,26 +1,13 @@
 <h1>Listing events</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Lat</th>
-      <th>Lng</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<table class="table">
 
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
-        <td><%= event.lat %></td>
-        <td><%= event.lng %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= fa_icon event.icon, style: "font-size: 1.4em;" %> 
+			<%= event.created_at.strftime("%H:%M") %>
+			<%= event.name %> (<%= time_ago_in_words event.created_at %>)</td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +15,5 @@
 
 <br>
 
+<%= link_to fa_icon("ambulance") + " Call Doctor", "#", class: "btn" %><br />
 <%= link_to 'New Event', new_event_path %>
