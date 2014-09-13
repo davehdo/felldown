@@ -18,7 +18,7 @@
 			    <% @followers.each do |follower| %>
 			      <tr>
 			        <td><%= fa_icon "user", style: "font-size: 1.4em;" %> 
-						<%= follower.name %>
+						<%= link_to follower.name, edit_follower_path( follower ) %> <span class="text-muted"><%= fa_icon( "phone") if follower.valid_number? %></span>
 						<%= link_to fa_icon("close"), follower, method: :delete, style: "float:right", data: { confirm: 'Are you sure?' } %></td>
 			      </tr>
 			    <% end %>

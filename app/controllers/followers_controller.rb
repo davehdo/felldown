@@ -24,7 +24,8 @@ class FollowersController < ApplicationController
     @follower = Follower.new(follower_params)
 
     if @follower.save
-      redirect_to @follower, notice: 'Follower was successfully created.'
+      redirect_to root_path
+      # redirect_to @follower, notice: 'Follower was successfully created.'
     else
       render action: 'new'
     end
@@ -33,7 +34,8 @@ class FollowersController < ApplicationController
   # PATCH/PUT /followers/1
   def update
     if @follower.update(follower_params)
-      redirect_to @follower, notice: 'Follower was successfully updated.'
+      redirect_to root_path
+      # redirect_to @follower, notice: 'Follower was successfully updated.'
     else
       render action: 'edit'
     end
