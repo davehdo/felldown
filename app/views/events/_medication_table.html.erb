@@ -1,0 +1,32 @@
+<table class='table'>
+	<tr>
+		<th> Medication </th>
+		<th></th>
+		<th> Yest AM </th>
+		<th> Yest PM </th>
+		<th> Today AM </th>
+		<th> Today PM </th>
+
+	</tr>
+	<% @meds.each do |med| %>
+	<tr>
+		<td><%= "#{med[:name]} #{med[:dose]}"%></td>
+		<td><%= med[:indication] %></td>
+		<% med[:doses].each do |dose| %>
+		<td>	
+		<% if dose.nil? %>
+
+			<% else %>
+				<% if dose %>
+					<%= fa_icon "check", class: "text-success" %>
+				<% else %>
+					<%= fa_icon "close", class: "text-danger" %>
+				<% end %>
+			<% end %>
+		<% end %>
+		</td>
+
+	</tr>
+	<% end %>
+</table>
+

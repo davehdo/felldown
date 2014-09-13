@@ -35,18 +35,17 @@ class EventsController < ApplicationController
   def index
     @events = Event.order("created_at DESC").limit(12)
     @followers = Follower.all
-  end
-
-  def medications
+    
     @meds = [
-      {name: 'Simvastatin', dose: '20mg at bedtime', doses: [nil, true, nil, nil], missed: 1},
-      {name: 'Lisinopril', dose: '40mg daily', doses: [true, nil, false, nil], missed: 4},
-      {name: 'Metformin', dose: '1000mg twice daily', doses: [true, true, false, nil], missed: 4},
-      {name: 'Aspirin', dose: '81mg daily', doses: [true, true, false, nil], missed: 2},
-      {name: 'Furosemide', dose: '40mg daily', doses: [true, true, false, nil], missed: 4},
-      {name: 'Levetiracetam', dose: '1000mg twice daily', doses: [true, true, false, nil], missed: 4}
+      {name: 'Simvastatin', indication: "Lowers cholesterol", dose: '20mg at bedtime', doses: [nil, true, nil, nil], missed: 1},
+      {name: 'Lisinopril', indication: "Lowers blood pressure", dose: '40mg daily', doses: [true, nil, false, nil], missed: 4},
+      {name: 'Metformin', indication: "Controls diabetes", dose: '1000mg twice daily', doses: [true, true, false, nil], missed: 4},
+      {name: 'Aspirin', indication: "Prevents heart attacks & strokes", dose: '81mg daily', doses: [true, true, false, nil], missed: 2},
+      {name: 'Furosemide', indication: "Lowers blood pressure", dose: '40mg daily', doses: [true, true, false, nil], missed: 4},
+      {name: 'Levetiracetam', indication: "Prevents Seizures", dose: '1000mg twice daily', doses: [true, true, false, nil], missed: 4}
       
       ]
+    
   end
 
   # GET /events/1
