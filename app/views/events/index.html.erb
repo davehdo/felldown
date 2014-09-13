@@ -38,7 +38,7 @@
 	<table class="table" id="events-table" last-event-id="<%= @events.collect{|e|e.id}.max %>">
 	  <tbody>
 	    <% @events.group_by(&:created_on).each do |date, events| %>
-			<tr><td><%= date %></td></tr>
+			<tr><td><%= date.strftime("%a %b %d, %Y") %></td></tr>
 			<% events.sort_by {|e| e.created_at}.each do |event| %>
 				<%= render "row", event: event %>
 			<% end %>

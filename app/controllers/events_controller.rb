@@ -2,12 +2,14 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def minorfall
-    event = Event.create name: "Fall detected: Grandma says she is okay"
+    event = Event.create name: "Fall detected: Grandma says she is okay",
+      lat: params[:lat], lng: params[:lng]
     render status: 200, inline: "success"
   end
 
   def majorfall
-    event = Event.create name: "Fall detected: Grandma says she needs help"
+    event = Event.create name: "Fall detected: Grandma says she needs help",
+      lat: params[:lat], lng: params[:lng]
     render status: 200, inline: "success"
   end
   
