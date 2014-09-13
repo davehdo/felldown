@@ -8,7 +8,6 @@ Felldown::Application.routes.draw do
       get "panic"
       get "medications"
       get "refresh"
-      get 'medications'
     end
   end
 
