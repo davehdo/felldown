@@ -33,7 +33,7 @@ class EventsController < ApplicationController
   
   # GET /events
   def index
-    @events = Event.order("created_at DESC").limit(12)
+    @events = Event.order("created_at DESC").limit(8)
     @followers = Follower.all
     
     @meds = [
