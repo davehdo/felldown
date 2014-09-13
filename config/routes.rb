@@ -6,6 +6,7 @@ Felldown::Application.routes.draw do
       get "minorfall" 
       get "majorfall"
       get "panic"
+      get "medications"
       get "refresh"
     end
   end
