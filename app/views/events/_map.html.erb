@@ -7,11 +7,19 @@
   //create function that queries phone for gps coordinates
   function initialize() {
     var mapOptions = {
-      center: { lat: <%= lat %>, lng: <%= lng %>},
+      center: { lat: <%= markers.any? ? markers.collect{|e|e[:lat]}.instance_eval{ reduce(:+) / size.to_f } : 39.95 %>, 
+		lng: <%= markers.any? ? markers.collect{|e|e[:lng]}.instance_eval { reduce(:+) / size.to_f } : -75.19 %>},
       zoom: 16
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
+	<% markers.each do |marker| %>
+	var marker = new google.maps.Marker({
+	    position: new google.maps.LatLng(<%= marker[:lat] %>,<%= marker[:lng]  %>),
+	    map: map,
+	    title: "<%= marker[:name] %>"
+	});
+	<% end %>
   }
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
