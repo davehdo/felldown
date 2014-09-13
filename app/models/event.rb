@@ -30,8 +30,9 @@ class Event < ActiveRecord::Base
       end
     end
         
-    Follower.all.select{|e| e.valid_email?}.each do |follower|
-      FollowerMailer.send_notification(follower, self.name).deliver
+    email_addresses = Follower.all.select{|e| e.valid_email?}.collect{|e| e.email }
+    if email_addresses and email_addresses.size > 0
+      FollowerMailer.send_notification(email_addresses, self.name).deliver
     end
   end
   

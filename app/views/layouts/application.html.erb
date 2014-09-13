@@ -63,7 +63,7 @@
 	    
 	        <li><a href="#" rel="popover" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="Falls in the past 30 days" data-content="In people who fall more than 5 times per month, blood-thinning medications like warfarin or apixiban may be dangerous">Falls <span class="badge"><%= Event.where("name LIKE '%fall%'").size %></span></a></li>
 	        <li><a href="#" rel="popover" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="Average sleep per night" data-content="People who sleep less than six hours per day may experience fatigue and increased falls.">Hr Sleep <span class="badge">4.3</span></a></li>
-	        <li><a href='medications' rel="popover" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="Medication Misses in the past 30 days" data-content="Forgetfulness is common, but forgetting more than 10 times per month may be an early sign of dementia.">Rx Misses <span class="badge">21</span></a></li>
+	        <li><a href='#meds' rel="popover" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="Medication Misses in the past 30 days" data-content="Forgetfulness is common, but forgetting more than 10 times per month may be an early sign of dementia.">Rx Misses <span class="badge">21</span></a></li>
 	        <li><a href="#" rel="popover" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-title="Percent of day walking or moving" data-content="People should spend at least 30% of their day moving around to prevent events like strokes and heart attacks.">Activity <span class="badge"><%= "15%" %></span></a></li>
 	      </ul>
 	<% if false %>
