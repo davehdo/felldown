@@ -3,7 +3,7 @@
 		<div class="well">
 			<img src="/Grandma.jpg" class="img-responsive img-circle">
 			
-			<h2>Grandma</h2>
+			<h2>Grandma Jo</h2>
 			<%= link_to fa_icon("ambulance") + " Call 911", "#", class: "btn btn-default btn-block" %>
 
 			<%= link_to fa_icon("user-md") + " Call Doctor", "#", class: "btn btn-default btn-block" %>
@@ -12,8 +12,7 @@
 			<%= link_to fa_icon("plus"), new_follower_path, class: "btn btn-default pull-right" %>
 	      	<h3>Followers</h3>
 
-			<table class="table">
-
+			<table class="table table-condensed">
 			  <tbody>
 			    <% @followers.each do |follower| %>
 			      <tr>
@@ -47,6 +46,7 @@
 	</table>
 	<i class="text-muted" id="events-timestamp"></i>
 	
+	<h2>Fall Locations</h2>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready( function() {
 			setTimeout( refreshEventsTable, 5000 )
@@ -62,6 +62,37 @@
 		}
 	</script>
 	<%= render "map", markers: @events.select{|e|e.lat and e.lng}.collect{|e|{ name: e.name, lat: e.lat, lng: e.lng} } %>
+	
+	
+	<h2>Fall Frequency, last 60 days</h2>
+      <div id="chart_div" style="width: 600px; height: 100px;"></div>
+
+   <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      var data;
+      var chart;
+
+      var options = {
+		bar: {groupWidth: "100%"},
+		legend: {position: "none"},
+		vAxis: {textPosition: "none"},
+        hAxis: {textPosition: "none", gridlines: { color: "#FFF", count: 0 }, minorGridlines: { count: 0}},
+          animation: {duration: 1000,  easing:"out"}
+        };
+
+      function drawChart() {
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'Number of Falls');
+		<% ((Time.now.to_date - 60.days)..Time.now.to_date).each do |time|  %>
+        	data.addRow([ "<%= time.strftime("%m/%d/%Y") %>", <%= (rand ** 3 * 3).floor %> ]);
+		<% end %>
+        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+
+    </script>
   </div><!-- /span -->
 
 
