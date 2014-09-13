@@ -4,3 +4,7 @@ $("#events-table > tbody").append("<%= escape_javascript render( "row", event: e
 
 <%# to let us know its still syncing %>
 $("#events-timestamp").html("Updated <%= Time.now %>")
+
+<% if @events.any? %>
+$("#events-table").attr("last-event-id", @events.collect{|e|e.id}.max || 0)
+<% end %>

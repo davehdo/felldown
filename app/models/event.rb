@@ -1,9 +1,9 @@
 class Event < ActiveRecord::Base
-  after_create :notify
+  after_create :notify_followers
   
   require 'twilio-ruby'
   
-  def notify
+  def notify_followers
     # put your own credentials here
     raise "please define TWILIO_SID in config/application.yml" if ENV["TWILIO_SID"].nil?
     account_sid = ENV["TWILIO_SID"]
@@ -12,15 +12,17 @@ class Event < ActiveRecord::Base
     # set up a client to talk to the Twilio REST API
     @client = Twilio::REST::Client.new account_sid, auth_token
     
-    Follower.all.select{|e|e.valid_number?}.each do |follower|
-      begin
-        @client.messages.create(
-          :from => '+12673231623',
-          :to => follower.number,
-          :body => self.name
-        )
-      rescue
-        puts "Unable to send to #{follower.number}. invalid number?"
+    if self.notify
+      Follower.all.select{|e|e.valid_number?}.each do |follower|
+        begin
+          @client.messages.create(
+            :from => '+12673231623',
+            :to => follower.number,
+            :body => self.name
+          )
+        rescue
+          puts "Unable to send to #{follower.number}. invalid number?"
+        end
       end
     end
         
@@ -30,12 +32,12 @@ class Event < ActiveRecord::Base
   end
   
   def icon
-    if self.name =~ /fall/i
+    if self.color == "danger"
       "exclamation-triangle"
-    elsif self.name =~ /confirms/i
-      "comment"
+    elsif self.color == "warning"
+      "medkit"
     else
-      "check"
+      "comment"
     end
   end
   

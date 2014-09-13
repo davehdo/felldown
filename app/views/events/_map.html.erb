@@ -1,5 +1,5 @@
 <style type="text/css">
-#map-canvas { width: 500px; height: 300px;  margin: 0; padding: 0; }
+#map-canvas { width: 500px; height: 240px;  margin: 0; padding: 0; }
 </style>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYNK6y-5rhc3dA9k4QhXOb213a8B10pds">
 </script>
@@ -7,9 +7,9 @@
   //create function that queries phone for gps coordinates
   function initialize() {
     var mapOptions = {
-      center: { lat: <%= markers.any? ? markers.collect{|e|e[:lat]}.instance_eval{ reduce(:+) / size.to_f } : 39.95 %>, 
-		lng: <%= markers.any? ? markers.collect{|e|e[:lng]}.instance_eval { reduce(:+) / size.to_f } : -75.19 %>},
-      zoom: 16
+      center: { lat: <%= markers.any? ? markers.last[:lat] : 39.95 %>, 
+		lng: <%= markers.any? ? markers.last[:lng] : -75.19 %>},
+      zoom: 18
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);

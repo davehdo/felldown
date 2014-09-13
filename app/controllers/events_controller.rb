@@ -1,18 +1,30 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  def medications
+    event = Event.create name: "Grandma took her medications",
+      lat: params[:lat], lng: params[:lng], color: "info", notify: false
+    render status: 200, inline: "success"
+  end
+
   def minorfall
-    event = Event.create name: "Fall detected: Grandma says she is okay",
-      lat: params[:lat], lng: params[:lng]
+    event = Event.create name: "Fall Detected: Grandma says she is okay",
+      lat: params[:lat], lng: params[:lng], color: "warning"
     render status: 200, inline: "success"
   end
 
   def majorfall
-    event = Event.create name: "Fall detected: Grandma says she needs help",
-      lat: params[:lat], lng: params[:lng]
+    event = Event.create name: "Fall Detected: Grandma says she needs help",
+      lat: params[:lat], lng: params[:lng], color: "danger"
     render status: 200, inline: "success"
   end
   
+  def panic
+    event = Event.create name: "Panic Button",
+      lat: params[:lat], lng: params[:lng], color: "danger"
+    render status: 200, inline: "success"
+  end
+    
   # called from events#index and updates to the table #events-table
   def refresh
     @events = Event.where("id > ?", params[:last_event_id])
