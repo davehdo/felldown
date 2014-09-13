@@ -7,7 +7,6 @@
 			<%= link_to fa_icon("ambulance") + " Call 911", "#", class: "btn btn-default btn-block" %>
 
 			<%= link_to fa_icon("user-md") + " Call Doctor", "#", class: "btn btn-default btn-block" %>
-
 	    </div>
 	    <div class="well">
 	      	<h3>Followers</h3>
@@ -29,15 +28,6 @@
   </div><!--/span-->
 
   <div class="col-md-9">
-	<div class="row">
-		<%= render "count", number: Event.where("name LIKE '%fall%'").size, description: "falls in the past month" %>
-		<%= render "count", number: 4.3, description: "hours of sleep per night" %>
-	</div><!-- /row -->
-
-	<div class="row">
-		<%= render "count", number: 21, description: "medication doses missed" %>
-		<%= render "count", number: "15%", description: "of day spent moving" %>
-	</div><!-- /row -->
 	
 	<h1>Events</h1>
 
