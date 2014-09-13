@@ -4,6 +4,6 @@ class Follower < ActiveRecord::Base
   end
   
   def valid_email?
-    self.email.match(/[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/i) ~= nil
+    self.email.match(/[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/i) != nil
   end
 end
