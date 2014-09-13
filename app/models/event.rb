@@ -13,11 +13,15 @@ class Event < ActiveRecord::Base
     @client = Twilio::REST::Client.new account_sid, auth_token
     
     Follower.all.select{|e|e.valid_number?}.each do |follower|
-      @client.messages.create(
-        :from => '+12673231623',
-        :to => follower.number,
-        :body => self.name
-      )
+      begin
+        @client.messages.create(
+          :from => '+12673231623',
+          :to => follower.number,
+          :body => self.name
+        )
+      rescue
+        puts "Unable to send to #{follower.number}. invalid number?"
+      end
     end
   end
   
