@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913053354) do
+ActiveRecord::Schema.define(version: 20140913182047) do
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20140913053354) do
     t.float    "lng"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "color"
+    t.boolean  "notify",     default: true
   end
 
   create_table "followers", force: true do |t|
