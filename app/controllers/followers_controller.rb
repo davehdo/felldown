@@ -1,14 +1,5 @@
 class FollowersController < ApplicationController
-  before_action :set_follower, only: [:show, :edit, :update, :destroy]
-
-  # GET /followers
-  def index
-    @followers = Follower.all
-  end
-
-  # GET /followers/1
-  def show
-  end
+  before_action :set_follower, only: [:edit, :update, :destroy]
 
   # GET /followers/new
   def new
@@ -44,7 +35,7 @@ class FollowersController < ApplicationController
   # DELETE /followers/1
   def destroy
     @follower.destroy
-    redirect_to followers_url, notice: 'Follower was successfully destroyed.'
+    redirect_to root_path, notice: 'Follower was successfully destroyed.'
   end
 
   private

@@ -1,10 +1,11 @@
 Felldown::Application.routes.draw do
-  resources :followers
+  resources :followers, only: [:edit, :new, :create, :update, :destroy]
 
   resources :events do
     collection do 
       get "minorfall" 
       get "majorfall"
+      get "refresh"
     end
   end
 
