@@ -7,8 +7,8 @@
   //create function that queries phone for gps coordinates
   function initialize() {
     var mapOptions = {
-      center: { lat: <%= markers.any? ? markers.collect{|e|e[:lat]}.instance_eval{ reduce(:+) / size.to_f } : 39.95 %>, 
-		lng: <%= markers.any? ? markers.collect{|e|e[:lng]}.instance_eval { reduce(:+) / size.to_f } : -75.19 %>},
+      center: { lat: <%= markers.any? ? markers.last[:lat] : 39.95 %>, 
+		lng: <%= markers.any? ? markers.last[:lng] : -75.19 %>},
       zoom: 16
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'),
