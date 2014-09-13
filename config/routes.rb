@@ -1,5 +1,10 @@
 Felldown::Application.routes.draw do
-  resources :events
+  resources :events do
+    collection do 
+      get "minorfall" 
+      get "majorfall"
+    end
+  end
 
 
   # You can have the root of your site routed with "root"

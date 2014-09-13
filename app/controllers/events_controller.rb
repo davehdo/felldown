@@ -1,6 +1,16 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  def minorfall
+    event = Event.create name: "Fall detected: Grandma says she is okay"
+    redirect_to events_url
+  end
+
+  def majorfall
+    event = Event.create name: "Fall detected: Grandma says she needs help"
+    redirect_to events_url
+  end
+  
   # GET /events
   def index
     @events = Event.all
