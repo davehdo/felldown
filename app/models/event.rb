@@ -3,6 +3,10 @@ class Event < ActiveRecord::Base
   
   require 'twilio-ruby'
   
+  def title
+    "#{self.created_at.strftime("%H:%M")} #{self.name}"
+  end
+  
   def notify_followers
     # put your own credentials here
     raise "please define TWILIO_SID in config/application.yml" if ENV["TWILIO_SID"].nil?

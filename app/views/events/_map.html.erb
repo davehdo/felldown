@@ -5,19 +5,21 @@
 </script>
 <script type="text/javascript">
   //create function that queries phone for gps coordinates
+
+	var map; // map should be a global
   function initialize() {
     var mapOptions = {
       center: { lat: <%= markers.any? ? markers.last[:lat] : 39.95 %>, 
 		lng: <%= markers.any? ? markers.last[:lng] : -75.19 %>},
       zoom: 18
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'),
+    map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 	<% markers.each do |marker| %>
 	var marker = new google.maps.Marker({
 	    position: new google.maps.LatLng(<%= marker[:lat] %>,<%= marker[:lng]  %>),
 	    map: map,
-	    title: "<%= marker[:name] %>"
+	    title: "<%= marker[:title] %>"
 	});
 	<% end %>
   }

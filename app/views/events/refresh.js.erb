@@ -1,10 +1,22 @@
 <% @events.each do |event| %>
 $("#events-table > tbody").append("<%= escape_javascript render( "row", event: event ) %>");
+
+	<% if event.lat and event.lng %>
+		var newMarker = new google.maps.LatLng(<%= event.lat %>,<%= event.lng %>);
+		var marker = new google.maps.Marker({
+		    position: newMarker,
+		    map: map,
+		    title:"<%= event.title %>"
+		});
+		
+		map.setCenter(newMarker)
+	<% end %>
 <% end %>
 
 <%# to let us know its still syncing %>
 $("#events-timestamp").html("Updated <%= Time.now %>")
 
 <% if @events.any? %>
-$("#events-table").attr("last-event-id", @events.collect{|e|e.id}.max || 0)
+$("#events-table").attr("last-event-id", <%= @events.collect{|e|e.id}.max || 0 %>)
 <% end %>
+

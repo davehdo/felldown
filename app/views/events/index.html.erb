@@ -61,7 +61,7 @@
 			});
 		}
 	</script>
-	<%= render "map", markers: @events.select{|e|e.lat and e.lng}.collect{|e|{ name: e.name, lat: e.lat, lng: e.lng} } %>
+	<%= render "map", markers: @events.select{|e|e.lat and e.lng}.collect{|e|{ title: e.title, lat: e.lat, lng: e.lng} } %>
 	
 	
 	<h2>Fall Frequency, last 60 days</h2>
