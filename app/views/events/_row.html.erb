@@ -4,7 +4,7 @@
 		<%= fa_icon event.icon, style: "font-size: 1.4em;" %> 
 		<%= event.created_at.strftime("%H:%M") %>
 		<%= event.name %> (<%= time_ago_in_words event.created_at %> ago)
-		<%= fa_icon "location-arrow" if event.lat and event.lng %>
+		<%= link_to( fa_icon( "location-arrow"), "javascript:map.setCenter(new google.maps.LatLng(#{event.lat}, #{event.lng}))") if event.lat and event.lng %>
 		</span>
 	</td>
   <td><%= link_to fa_icon("close"), event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
