@@ -37,4 +37,4 @@ end
 
 gem "activerecord-postgresql-adapter"
 
-
+gem "twitter-bootstrap-rails"
