@@ -35,20 +35,32 @@
 	<div style="float:right">Device: <%= image_tag "/pebble.jpg", size: "30x36", classx:" img-circle" %> Pebble</div>
 	<h1>Events</h1>
 
-	<table class="table">
-
+	<table class="table" id="events-table" last-event-id="<%= @events.collect{|e|e.id}.max %>">
 	  <tbody>
-	    <% @events.each do |event| %>
-	      <tr>
-	        <td><%= fa_icon event.icon, style: "font-size: 1.4em;" %> 
-				<%= event.created_at.strftime("%H:%M") %>
-				<%= event.name %> (<%= time_ago_in_words event.created_at %> ago)</td>
-	        <td><%= link_to fa_icon("close"), event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	      </tr>
+	    <% @events.group_by(&:created_on).each do |date, events| %>
+			<tr><td><%= date %></td></tr>
+			<% events.sort_by {|e| e.created_at}.each do |event| %>
+				<%= render "row", event: event %>
+			<% end %>
 	    <% end %>
 	  </tbody>
 	</table>
+	<i class="text-muted" id="events-timestamp"></i>
 	
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready( function() {
+			setTimeout( refreshEventsTable, 5000 )
+		})
+		
+		var refreshEventsTable = function() {
+			$.ajax({
+			  url: "<%= refresh_events_url %>",
+			  data: "last_event_id=" + $("#events-table").attr("last-event-id"),
+			  complete: function() { setTimeout( refreshEventsTable, 5000 ) },
+			  dataType: "script"
+			});
+		}
+	</script>
 	<%= render "map", lat: 39.95, lng: -75.19 %>
   </div><!-- /span -->
 

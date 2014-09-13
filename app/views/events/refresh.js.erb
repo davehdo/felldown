@@ -1,0 +1,6 @@
+<% @events.each do |event| %>
+$("#events-table > tbody").append("<%= escape_javascript render( "row", event: event ) %>");
+<% end %>
+
+<%# to let us know its still syncing %>
+$("#events-timestamp").html("Updated <%= Time.now %>")

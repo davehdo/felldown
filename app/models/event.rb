@@ -30,4 +30,8 @@ class Event < ActiveRecord::Base
       "check"
     end
   end
+  
+  def created_on 
+    self.created_at.to_date
+  end
 end

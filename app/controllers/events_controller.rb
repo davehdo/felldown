@@ -3,17 +3,23 @@ class EventsController < ApplicationController
 
   def minorfall
     event = Event.create name: "Fall detected: Grandma says she is okay"
-    redirect_to events_url
+    render status: 200, inline: "success"
   end
 
   def majorfall
     event = Event.create name: "Fall detected: Grandma says she needs help"
-    redirect_to events_url
+    render status: 200, inline: "success"
+  end
+  
+  # called from events#index and updates to the table #events-table
+  def refresh
+    @events = Event.where("id > ?", params[:last_event_id])
+    render "refresh.js"
   end
   
   # GET /events
   def index
-    @events = Event.all
+    @events = Event.order("created_at DESC").limit(12)
     @followers = Follower.all
   end
 
