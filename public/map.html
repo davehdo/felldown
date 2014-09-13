@@ -1,60 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style type="text/css">
-      html, body, #map-canvas { width: 500px; height: 90%; margin: 0; padding: 0; }
-    </style>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYNK6y-5rhc3dA9k4QhXOb213a8B10pds">
-    </script>
-    <script type="text/javascript">
-      //create function that queries phone for gps coordinates
-      function initialize() {
-        var mapOptions = {
-          center: { lat: 39.95, lng: -75.19},
-          zoom: 16
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    
 
 
   </head>
   <body>
+    <button id="button">Add Row</button>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Felldown</a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+    <div id="body">
+      
+      <div id="chart_div" style="width: 900px; height: 500px;"></div>
+      <div id="footer">
+        <!-- <span>…</span> -->
+        
       </div>
     </div>
+   <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      var data;
+      var chart;
+      
+      var options = {
+          title: 'Falls per Day',
+          hAxis: {title: 'Number of Falls', titleTextStyle: {color: 'black'}},
+          animation: {duration: 1000, 
+                      easing:"out"}
+        };
 
+      function drawChart() {
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Date');
+        data.addColumn('number', 'Number of Falls');
+        data.addRow(['6/19/2003',  1000]);
+        data.addRow(['6/20/2003',  1170]);
+        data.addRow(['6/22/2003',  660]);
+        data.addRow(['3/22/2005',  1030]);
+
+        
+
+        
+        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+
+      function shuffleAndDrawChart() {
+      for (var i = 0; i < data.getNumberOfRows(); ++i) {
+        for (var j = 1; j < data.getNumberOfColumns(); ++j) {
+          var num = Math.floor(Math.random() * 1000);
+          data.setValue(i, j, num);
+        }
+      }
+      chart.draw(data, options);
+      // drawChart();
+    }
+
+    var addButton = document.getElementById('button');
+
+    addButton.onclick = function(){
+      console.log("clicked");
+      var num = Math.floor((Math.random() * 10) + 1);
+      console.log(num);
+      data.addRow(['3/'+num+'/2007', num]);
+      shuffleAndDrawChart();
+    }
     
-    <div id="map-canvas"></div>
 
 
-    <div class="container">
-
-      <footer>
-        <p>&copy; Company 2014</p>
-      </footer>
-
-    </div> <!-- /container -->
-
+    </script>
   </body>
 </html>
