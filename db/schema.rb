@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913041938) do
+ActiveRecord::Schema.define(version: 20140913053354) do
 
   create_table "events", force: true do |t|
     t.string   "name"
     t.float    "lat"
     t.float    "lng"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "followers", force: true do |t|
+    t.string   "name"
+    t.string   "number"
+    t.string   "email"
+    t.string   "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

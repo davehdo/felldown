@@ -1,17 +1,44 @@
-<h1>Events</h1>
+<div class="row">
+  <div class="span9">
+	<h1>Events</h1>
 
-<table class="table">
+	<table class="table">
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= fa_icon event.icon, style: "font-size: 1.4em;" %> 
-			<%= event.created_at.strftime("%H:%M") %>
-			<%= event.name %> (<%= time_ago_in_words event.created_at %>)</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	  <tbody>
+	    <% @events.each do |event| %>
+	      <tr>
+	        <td><%= fa_icon event.icon, style: "font-size: 1.4em;" %> 
+				<%= event.created_at.strftime("%H:%M") %>
+				<%= event.name %> (<%= time_ago_in_words event.created_at %>)</td>
+	        <td><%= link_to fa_icon("close"), event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+  </div><!-- /span -->
+
+  <div class="span3">
+    <div class="well sidebar-nav">
+      	<h3>Sidebar</h3>
+
+		<table class="table">
+
+		  <tbody>
+		    <% @followers.each do |follower| %>
+		      <tr>
+		        <td><%= fa_icon "user", style: "font-size: 1.4em;" %> 
+					<%= follower.name %>
+					<%= link_to fa_icon("close"), follower, method: :delete, style: "float:right", data: { confirm: 'Are you sure?' } %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+		<%= link_to fa_icon("plus"), new_follower_path, class: "btn" %>
+    </div><!--/.well -->
+  </div><!--/span-->
+</div><!--/row-->
+
+
 
 <br>
 

@@ -28,7 +28,7 @@ group :production do
   gem 'pg'
 end
 # gem 'mechanize'
-# gem 'figaro'
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3' # Use sqlite3 as the database for Active Record
@@ -40,3 +40,5 @@ gem "activerecord-postgresql-adapter"
 gem "twitter-bootstrap-rails"
 
 gem "font-awesome-rails", "4.2.0"
+
+gem 'twilio-ruby', '~> 3.12'

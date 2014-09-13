@@ -1,4 +1,6 @@
 Felldown::Application.routes.draw do
+  resources :followers
+
   resources :events do
     collection do 
       get "minorfall" 

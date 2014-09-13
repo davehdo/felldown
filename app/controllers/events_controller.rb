@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   # GET /events
   def index
     @events = Event.all
+    @followers = Follower.all
   end
 
   # GET /events/1
