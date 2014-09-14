@@ -24,6 +24,11 @@ class EventsController < ApplicationController
       lat: params[:lat], lng: params[:lng], color: "danger"
     render status: 200, inline: "success"
   end
+  
+  def weight
+    event = Event.create name: "New Weight: #{params[:weight]} lbs", color: 'info', notify: false
+    render status: 200, inline: "Success"
+  end
     
   # called from events#index and updates to the table #events-table
   def refresh
