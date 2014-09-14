@@ -28,11 +28,10 @@ class Event < ActiveRecord::Base
           puts "Unable to send to #{follower.number}. invalid number?"
         end
       end
-    end
-        
-    email_addresses = Follower.all.select{|e| e.valid_email?}.collect{|e| e.email }
-    if email_addresses and email_addresses.size > 0
-      FollowerMailer.send_notification(email_addresses, self.name).deliver
+      email_addresses = Follower.all.select{|e| e.valid_email?}.collect{|e| e.email }
+      if email_addresses and email_addresses.size > 0
+        FollowerMailer.send_notification(email_addresses, self.name).deliver
+      end
     end
   end
   
