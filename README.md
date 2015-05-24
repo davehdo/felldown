@@ -1,3 +1,6 @@
+# Introduction
+This is a web application that acts as a real time dashboard to track an elderly family member. The family member wears a smartwatch to detect falls or acknowledge medication reminders, and the wifi enabled watch sends messages to this app. This was built in Ruby on Rails for PennApps Fall 2014.
+
 # Getting Started
 ## Set environmental variables in config/application.yml
 ```
